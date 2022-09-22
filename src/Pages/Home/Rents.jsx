@@ -27,7 +27,7 @@ const Rents = () => {
   const [isTyping, setIsTyping] = useState(true)
 
   useEffect(() => {
-    if (newRents?.length > 0) return
+    // if (newRents?.length > 0) return
 
     const newSalesRef = query(
       collection(firebase.db, 'properties'),
