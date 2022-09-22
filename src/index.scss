@@ -1,0 +1,64 @@
+$primary-color:#111721;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Ravi Prakash;
+  color: white;
+  background-color: $primary-color;
+  overflow-x: hidden;
+}
+
+.scroll,body::-webkit-scrollbar {
+  display: none;
+}
+
+#root{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  overflow-x: hidden !important;
+  align-items: center !important;
+  justify-content: center !important;
+    -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+}
+
+.container{
+  max-width: 1250px;
+  width: 100%;
+  position: relative;
+  padding: 1rem;
+}
+
+.submit {
+  font-family: Ravi Prakash;
+  color: $primary-color;
+  padding: 0px 12px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+}
+.submit:hover{
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.scroll {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.scroll,
+::-webkit-scrollbar {
+      background-color: white;
+      border-radius: 5px;
+      height: 5px;
+}

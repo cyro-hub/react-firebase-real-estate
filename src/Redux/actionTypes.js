@@ -1,0 +1,5 @@
+export const getRental = 'getRental'
+export const getSales = 'getSales'
+export const getRentalTrending = 'getRentalTrending'
+export const getSalesTrending = 'getSalesTrending'
+export const getFaq = 'getFaq'

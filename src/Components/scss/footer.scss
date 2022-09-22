@@ -1,0 +1,32 @@
+$primary-color: #111721;
+
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    background-color: whitesmoke;
+    color: $primary-color;
+    margin-top: 1rem;
+    // position: sticky !important;
+    padding: 1rem;
+    // bottom: 0% !important;
+
+    h4,h5{
+        width: 100%;
+        text-align: center;
+        max-width: 1250px;
+    }
+
+    .link-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem auto;
+
+        svg{
+            margin:0 0.5rem;
+        }
+    }
+}

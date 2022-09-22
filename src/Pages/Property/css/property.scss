@@ -1,0 +1,91 @@
+$media-tablet: "only screen and (max-width : 550px)";
+$primary-color: #111721;
+
+.property{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    .property-images-container{
+        max-width: 500px;
+        min-width: 400px;
+        display: block;
+        padding: 1rem;
+
+        .property-image{
+            margin: 1rem;
+            border-radius: 5px;
+            width: 90%;
+            max-height: 400px;
+            min-width: 350px;
+            margin-bottom: 2rem;
+        }
+        .users-attention{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg{
+                margin: 0 1rem;
+            }
+        }
+    }
+        .property-descriptions {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            min-width: 350px;
+            padding: 1rem;
+    
+            .header {
+                display: flex;
+                flex-direction: row !important;
+                justify-content: space-between;
+                padding: 0.5rem 1.5rem;
+                padding-left: 0;
+                h3{
+                    svg{
+                        color: green;
+                    }
+                }
+            }
+            .dimension, .location{
+                font-size: 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .location{
+                color: white;
+            }
+
+            .more-description{
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+
+                .description-property{
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 5px;
+                    text-align: center;
+
+                    h3{
+                        background-color: white;
+                        color: $primary-color;
+                        border-radius: 3px;
+                        padding: 0 5px;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+}
+
+@media #{$media-tablet} {
+    .property{
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,94 @@
+$primary-color: #111721;
+
+.card{
+    width: 250px;
+    position: relative;
+    border-radius: 5px;
+    padding-bottom: 5px;
+    margin: 0.5rem;
+
+    img{
+        width: 250px;
+        height: 200px;
+        border-radius: 5px;
+    }
+    .img-cover{
+        position: absolute;
+        top: 0;
+        width: 250px;
+        height: 200px;
+        background-color: rgba(0, 0, 0, 0.4);border-radius: 5px;
+
+        .badge{
+            margin-left: 3px;
+            margin-top: 3px;
+            background-color: $primary-color;
+            width: fit-content;
+            padding: 0px 5px ;
+            border-radius: 5px;
+        }
+    }
+    .info-header{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 0.5rem;
+        // margin-top: -10px;
+
+        .header{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            svg{
+                margin-bottom:7px ;
+                color: green;
+            }
+
+            h3{
+                margin-left: 5px;
+            }
+        }
+        .share{
+            svg{
+                margin-top: 5px;
+                margin-left: 18px;
+            }
+        }
+    }
+        .price, .dimension, .location {
+            width: 100%;
+            margin-top: -5px;
+            text-align: center;
+            h2 {
+                width: 100%;
+                text-align: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    .dimension{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .location{
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg{
+            margin-bottom: -3px;
+        }
+        a{
+            text-decoration: none;
+            color: green;
+            margin-left: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
