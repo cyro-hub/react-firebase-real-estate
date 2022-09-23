@@ -12,6 +12,7 @@ const Card = ({ property }) => {
 
   const {
     imagesURL,
+    key,
     property_type,
     price,
     number_of_room,
@@ -27,7 +28,7 @@ const Card = ({ property }) => {
       <div
         className="img-cover"
         onClick={() => {
-          navigate(`/property/test`, { state: property })
+          navigate(`/property/${key}`, { state: property })
         }}
       >
         <div className="badge">new</div>

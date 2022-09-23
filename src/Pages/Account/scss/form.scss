@@ -1,0 +1,107 @@
+$primary-color: #111721;
+
+.contact{
+    height: 100% !important;
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+
+    form{
+        display: flex !important;
+            flex-direction: column !important;
+            // max-width: 600px !important;
+            min-width: 200px !important;
+            margin: 0 auto !important;
+            font-size: larger !important;
+            font-weight: bold !important;
+
+        .input-container{
+            width: 100%;
+            position: relative;
+            margin: 0.75rem 0;
+
+            h2{
+                width: 100%;
+                text-align: center;
+                font-size: 25px;
+            }
+
+            p{
+                position: absolute;
+                left: 1rem;
+                top: -1.2rem;
+                background-color:$primary-color ;
+                padding: 0 10px;
+                z-index: 50;
+            }
+
+            .input {
+                border: 0.5px solid white;
+                border-radius: 5px;
+                width: 100%;
+                background-color:transparent;
+
+                input,textarea{
+                    outline: none;
+                    border: none;
+                    width: 100%;
+                    padding:10px;
+                    background-color: transparent;
+                    color: white;
+                    font-size: 15px;
+                    letter-spacing: 1px;
+                }
+                textarea{
+                    height: 100px;
+                }       
+            }
+        }
+
+        .continue-other-method{
+                margin-top:2.5rem ;
+                font-size: 15px;
+                width: 100%;
+                text-align: center;
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+
+        .continue-container{
+            width: 100%;
+            position: relative;
+            margin: 0.75rem 0;
+            p{
+                position: absolute;
+                left: 1rem;
+                top: -0.7rem;
+                background-color:$primary-color ;
+                padding: 0 10px;
+                z-index: 5;
+                font-size: 15px !important;
+            }
+            .continue-register {
+                display: flex;
+                border: 0.5px solid white;
+                border-radius: 5px;
+                width: 100%;
+                background-color:transparent;
+            
+                    svg {
+                        margin: 0.25rem auto;
+                        z-index: 10;
+                    }
+                }
+        }
+        
+
+        .submit-container{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between !important;
+        }
+        
+    }
+}

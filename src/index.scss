@@ -45,9 +45,31 @@ body {
   font-size: 20px;
   border-radius: 5px;
   border: none;
+  width: fit-content;
 }
 .submit:hover{
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+.swap {
+  color: white;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  font-family: Ravi Prakash;
+  width: fit-content;
+}
+
+.swap:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.warning{
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  color: rgb(255, 132, 0);
+  text-transform: capitalize;
 }
 
 .scroll {

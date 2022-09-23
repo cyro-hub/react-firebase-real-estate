@@ -1,71 +1,63 @@
 import React, { useState, useEffect } from 'react'
 import { TbBrandGoogleAnalytics } from 'react-icons/tb'
-import { BiBuildingHouse, BiUserCircle } from 'react-icons/bi'
-import '@splidejs/react-splide/css'
+import { BiUserCircle } from 'react-icons/bi'
 import Card from '../../Components/Card'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './scss/rents.scss'
 import Contact from '../../Components/Contact'
 import Footer from '../../Components/Footer'
-import * as firebase from '../../Firebase/firebase'
-import {
-  collection,
-  query,
-  orderBy,
-  limit,
-  where,
-  onSnapshot,
-} from 'firebase/firestore'
 import { BsSearch } from 'react-icons/bs'
 import logo from '../../assets/logo1.png'
-import * as rental from '../../Redux/actions/actions'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import useFetch from '../../custom hooks/useFetch'
+import useFetchFaq from '../../custom hooks/useFetchFaq'
+import * as firebase from '../../Firebase/firebase'
+import Avatar from '@mui/material/Avatar'
+import { signOut } from 'firebase/auth'
+import * as typesOfActions from '../../Redux/actionTypes'
 
 const Rents = () => {
-  const newRents = useSelector((state) => state.rentals)
+  useFetch('rents')
+  useFetchFaq()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user)
+  const newRents = useSelector((state) => state.rents)
   const faq = useSelector((state) => state.faq)
   const [isTyping, setIsTyping] = useState(true)
 
-  useEffect(() => {
-    // if (newRents?.length > 0) return
-
-    const newSalesRef = query(
-      collection(firebase.db, 'properties'),
-      where('category', '==', 'rents'),
-      orderBy('timeStamp', 'desc'),
-      limit(20),
-    )
-    let propArr = []
-    const newRentsUnsubscribe = onSnapshot(newSalesRef, (querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        propArr.push(doc.data())
+  const handleLogout = () => {
+    signOut(firebase.auth)
+      .then(() => {
+        dispatch({type:typesOfActions.getUserInfo,payload:null})
       })
-      rental.getRental(propArr)
-    })
-
-    return () => newRentsUnsubscribe
-  }, [])
-
-  useEffect(() => {
-    if (faq?.length > 0) return
-
-    const faqRef = query(collection(firebase.db, 'faq'))
-    let propArr = []
-    const newFaqUnsubscribe = onSnapshot(faqRef, (querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        propArr.push(doc.data())
+      .catch((error) => {
+        // An error happened.
       })
-      rental.getFaq(propArr)
-    })
-
-    return () => newFaqUnsubscribe
-  }, [])
+  }
 
   return (
     <>
       <div className="nav container">
         <img src={logo} alt="logo" />
-        <BiUserCircle size={28} />
+        {user ? (
+          user?.photoURL ? (
+            <Avatar
+              onClick={handleLogout}
+              alt="Remy Sharp"
+              src={user?.photoURL}
+            />
+          ) : (
+            <Avatar onClick={handleLogout}>RS</Avatar>
+          )
+        ) : (
+          <BiUserCircle
+            size={30}
+            onClick={() => {
+              navigate('/login')
+            }}
+          />
+        )}
       </div>
       <div className="welcome-cover">
         <div className="home-nav">
