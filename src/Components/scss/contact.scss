@@ -42,7 +42,7 @@ $primary-color: #111721;
                 width: 100%;
                 background-color:transparent;
 
-                input,textarea{
+                input,textarea,select{
                     outline: none;
                     border: none;
                     width: 100%;
@@ -55,6 +55,9 @@ $primary-color: #111721;
                 textarea{
                     height: 100px;
                 }
+                option{
+                    color:#111721;
+                }
             }
         }
 
@@ -62,6 +65,10 @@ $primary-color: #111721;
             display: flex;
             align-items: center;
             justify-content: center;
+
+            .submit{
+                margin: 0 auto;
+            }
         }
         
     }

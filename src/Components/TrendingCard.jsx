@@ -9,9 +9,11 @@ import { useNavigate } from 'react-router-dom'
 import * as firebase from '../Firebase/firebase'
 import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
+import Modal from '../Components/Comment'
 
 const Card = ({ property }) => {
   const navigate = useNavigate()
+  const [open, setOpen] = useState(false)
   const user = useSelector((state) => state.user)
   const [myLike, setMyLike] = useState(null)
 
@@ -26,6 +28,7 @@ const Card = ({ property }) => {
     location,
     location_description,
     likes,
+    comments,
   } = property
 
   const addLikes = async () => {
@@ -50,53 +53,66 @@ const Card = ({ property }) => {
   })
 
   return (
-    <div className="card">
-      <img src={imagesURL[0] || img} alt="img" loading="lazy" />
-      <div
-        className="img-cover"
-        onClick={() => {
-          navigate(`/property/${key}`, { state: property })
-        }}
-      >
-        <div className="badge">
-          <AiTwotoneLike size={10} />
-          {` ${likes.length}`}
-        </div>
-      </div>
-      <div className="card-info">
-        <div className="info-header">
-          <div className="header">
-            <BsCircleFill size={10} />
-            <h3>{property_type}</h3>
-          </div>
-          <div className="share">
-            {myLike ? (
-              <AiFillHeart size={25} onClick={addLikes} />
-            ) : (
-              <AiOutlineHeart size={25} onClick={addLikes} />
-            )}
-            <BsFillChatSquareFill size={23} />
-            <BsWhatsapp size={24} />
-          </div>
-        </div>
-      </div>
-      <div className="price">
-        <h2>
-          {' ' + price + ' '}
-          {'د.ك'}
-        </h2>
-      </div>
-      <div className="dimension">{`${number_of_room} bed room, ${number_of_bathroom} bath, ${sqft}sqft`}</div>
-      <div className="location">
-        <a
-          href={`https://www.google.com/maps?q=${location.lat},${location.lon}`}
-          target="blank"
+    <>
+      {open && (
+        <Modal
+          open={open}
+          setOpen={setOpen}
+          comments={comments}
+          uid={key}
+          property_type={property_type}
+        />
+      )}
+      <div className="card">
+        <img src={imagesURL[0] || img} alt="img" loading="lazy" />
+        <div
+          className="img-cover"
+          onClick={() => {
+            navigate(`/property/${key}`, { state: property })
+          }}
         >
-          <ImLocation size={18} />
-          {location_description}
-        </a>
+          <div className="badge">
+            <AiTwotoneLike size={10} />
+            {` ${likes.length}`}
+          </div>
+        </div>
+        <div className="card-info">
+          <div className="info-header">
+            <div className="header">
+              <BsCircleFill size={10} />
+              <h3>{property_type}</h3>
+            </div>
+            <div className="share">
+              {myLike ? (
+                <AiFillHeart size={25} onClick={addLikes} />
+              ) : (
+                <AiOutlineHeart size={25} onClick={addLikes} />
+              )}
+              <BsFillChatSquareFill size={23} onClick={() => setOpen(!open)} />
+              <a href="https://wa.me/96555303182" target="_blank">
+                <BsWhatsapp size={24} />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="price">
+          <h2>
+            {' ' + price + ' '}
+            {'د.ك'}
+          </h2>
+        </div>
+        <div className="dimension">{`${number_of_room} bed room, ${number_of_bathroom} bath, ${sqft}sqft`}</div>
+        <div className="location">
+          <a
+            href={`https://www.google.com/maps?q=${location.lat},${location.lon}`}
+            target="blank"
+          >
+            <ImLocation size={18} />
+            {location_description}
+          </a>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
