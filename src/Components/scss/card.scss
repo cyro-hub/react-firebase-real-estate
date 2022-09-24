@@ -40,6 +40,8 @@ $primary-color: #111721;
             display: flex;
             justify-content: center;
             align-items: center;
+            font-size: 20px;
+                
             svg{
                 margin-bottom:7px ;
                 color: green;
@@ -47,6 +49,10 @@ $primary-color: #111721;
 
             h3{
                 margin-left: 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 90px;
             }
         }
         .share{

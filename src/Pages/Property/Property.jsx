@@ -1,33 +1,53 @@
 import React, { useEffect, useState } from 'react'
 import '@splidejs/react-splide/css'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import './css/property.scss'
 import testImage from '../../assets/images/pexels-expect-best-323780.jpg'
-import { BsCircleFill, BsChatFill, BsWhatsapp } from 'react-icons/bs'
+import { BsCircleFill, BsWhatsapp } from 'react-icons/bs'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { FaShare } from 'react-icons/fa'
 import { ImLocation } from 'react-icons/im'
 import moment from 'moment'
+import { doc, onSnapshot } from 'firebase/firestore'
+import * as firebase from '../../Firebase/firebase'
+import ClipLoader from 'react-spinners/ClipLoader'
 
 const Property = () => {
-  const location = useLocation()
-  const {
-    imagesURL,
-    timeStamp,
-    built_in,
-    number_of_room,
-    number_of_bathroom,
-    sqft,
-    property_type,
-    price,
-    location_description,
-    description,
-  } = location.state
+  const [
+    {
+      imagesURL,
+      timeStamp,
+      built_in,
+      number_of_room,
+      number_of_bathroom,
+      sqft,
+      property_type,
+      price,
+      location_description,
+      description,
+    },
+    setProperty,
+  ] = useState({})
+
+  const param = useParams()
 
   useEffect(() => {
     //perform a fetch request from the firebase db based on the id of the property
+    const unsub = onSnapshot(
+      doc(firebase.db, 'properties', param.key),
+      (doc) => {
+        setProperty(doc.data())
+      },
+    )
   }, [])
+
+  if (!imagesURL)
+    return (
+      <div className="loader">
+        <ClipLoader color={'white'} loading={true} size={150} />
+      </div>
+    )
 
   return (
     <>
@@ -59,7 +79,14 @@ const Property = () => {
           <div className="users-attention">
             <AiOutlineHeart size={25} />
             <BsWhatsapp size={25} />
-            <FaShare size={25} />
+            <FaShare
+              size={25}
+              onClick={() =>
+                window.open(
+                  `https://web.whatsapp.com://send?text=${window.location}`,
+                )
+              }
+            />
           </div>
         </div>
         <div className="property-descriptions">

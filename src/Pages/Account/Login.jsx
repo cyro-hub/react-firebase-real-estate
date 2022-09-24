@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { BsFacebook, BsApple } from 'react-icons/bs'
+import { BsFacebook} from 'react-icons/bs'
 import './scss/form.scss'
 import { useNavigate } from 'react-router-dom'
 import * as firebase from '../../Firebase/firebase'
-import logo from '../../assets/logo1.png'
-import { BiUserCircle } from 'react-icons/bi'
 import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
-  FacebookAuthProvider,
-  OAuthProvider,
+  FacebookAuthProvider
 } from 'firebase/auth'
-import Avatar from '@mui/material/Avatar'
-import { signOut } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import * as typesOfActions from '../../Redux/actionTypes'
+import Nav from '../../Components/Nav'
 
 var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
@@ -98,18 +94,8 @@ const Login = () => {
       .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
-        setWarning(`${errorCode}:${errorMessage}`)
+        setWarning(`${errorMessage}`)
         navigate('/register')
-      })
-  }
-
-  const handleLogout = () => {
-    signOut(firebase.auth)
-      .then(() => {
-        dispatch({ type: typesOfActions.getUserInfo, payload: null })
-      })
-      .catch((error) => {
-        // An error happened.
       })
   }
 
@@ -127,7 +113,7 @@ const Login = () => {
       .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
-        setWarning(`${errorCode}:${errorMessage}`)
+        setWarning(`${errorMessage}`)
       })
   }
 
@@ -137,7 +123,7 @@ const Login = () => {
         let user = result.user
         dispatch({
           type: typesOfActions.getUserInfo,
-          payload: user,
+          payload: user
         })
 
         navigate('/')
@@ -145,7 +131,7 @@ const Login = () => {
       .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
-        setWarning(`${errorCode}:${errorMessage}`)
+        setWarning(`${errorMessage}`)
       })
   }
 
@@ -158,33 +144,7 @@ const Login = () => {
 
   return (
     <div className="contact">
-      <div className="nav container">
-        <img
-          src={logo}
-          alt="logo"
-          onClick={() => {
-            navigate('/')
-          }}
-        />
-        {userInfo ? (
-          userInfo?.photoURL ? (
-            <Avatar
-              onClick={handleLogout}
-              alt="Remy Sharp"
-              src={userInfo?.photoURL}
-            />
-          ) : (
-            <Avatar onClick={handleLogout}>RS</Avatar>
-          )
-        ) : (
-          <BiUserCircle
-            size={30}
-            onClick={() => {
-              navigate('/login')
-            }}
-          />
-        )}
-      </div>
+      <Nav/>
       <form onSubmit={handleSubmit}>
         <div className="input-container">
           <h2>Login</h2>

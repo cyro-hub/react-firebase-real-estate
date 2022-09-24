@@ -45,6 +45,9 @@ $primary-color: #111721;
                 padding: 0.5rem 1.5rem;
                 padding-left: 0;
                 h3{
+                    overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 150px;
                     svg{
                         color: green;
                     }

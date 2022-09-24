@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import img from '../assets/images/pexels-curtis-adams-6510949.jpg'
 import { BsCircleFill, BsWhatsapp } from 'react-icons/bs'
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
+import { AiOutlineHeart, AiFillHeart ,AiTwotoneLike} from 'react-icons/ai'
 import { FaShare } from 'react-icons/fa'
 import { ImLocation } from 'react-icons/im'
 import './scss/card.scss'
@@ -58,7 +58,7 @@ const Card = ({ property }) => {
           navigate(`/property/${key}`, { state: property })
         }}
       >
-        <div className="badge">new</div>
+        <div className="badge"><AiTwotoneLike size={10}/>{` ${likes.length}`}</div>
       </div>
       <div className="card-info">
         <div className="info-header">

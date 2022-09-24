@@ -30,7 +30,7 @@ useEffect(()=>{
        <Route path='/' element={<Navigate replace to='/rent'/>}/>
        <Route path='/rent' element={<Rents/>}/>
        <Route path='/sale' element={<Sales/>}/>
-       <Route path='/property/:id' element={<Property/>} />
+       <Route path='/property/:key' element={<Property/>} />
        <Route path='/register' element={<Register/>}/>
        <Route path='/login' element={<Login/>} />
      </Routes>

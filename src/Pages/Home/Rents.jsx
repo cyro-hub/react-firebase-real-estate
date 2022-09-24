@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { TbBrandGoogleAnalytics } from 'react-icons/tb'
-import { BiUserCircle } from 'react-icons/bi'
 import Card from '../../Components/Card'
 import { Link, useNavigate } from 'react-router-dom'
 import './scss/rents.scss'
@@ -11,54 +10,21 @@ import logo from '../../assets/logo1.png'
 import { useDispatch, useSelector } from 'react-redux'
 import useFetch from '../../custom hooks/useFetch'
 import useFetchFaq from '../../custom hooks/useFetchFaq'
-import * as firebase from '../../Firebase/firebase'
-import Avatar from '@mui/material/Avatar'
-import { signOut } from 'firebase/auth'
-import * as typesOfActions from '../../Redux/actionTypes'
+import Nav from '../../Components/Nav'
+import TrendingCard from '../../Components/TrendingCard'
 
 const Rents = () => {
   useFetch('rents')
   useFetchFaq()
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const user = useSelector((state) => state.user)
   const newRents = useSelector((state) => state.rents)
+  const trending = useSelector((state) => state.rentalsTrending)
   const faq = useSelector((state) => state.faq)
   const [isTyping, setIsTyping] = useState(true)
 
-  const handleLogout = () => {
-    signOut(firebase.auth)
-      .then(() => {
-        dispatch({type:typesOfActions.getUserInfo,payload:null})
-      })
-      .catch((error) => {
-        // An error happened.
-      })
-  }
-
   return (
     <>
-      <div className="nav container">
-        <img src={logo} alt="logo" />
-        {user ? (
-          user?.photoURL ? (
-            <Avatar
-              onClick={handleLogout}
-              alt="Remy Sharp"
-              src={user?.photoURL}
-            />
-          ) : (
-            <Avatar onClick={handleLogout}>RS</Avatar>
-          )
-        ) : (
-          <BiUserCircle
-            size={30}
-            onClick={() => {
-              navigate('/login')
-            }}
-          />
-        )}
-      </div>
+      <Nav />
       <div className="welcome-cover">
         <div className="home-nav">
           <Link className="rent" to="/rent">
@@ -95,9 +61,9 @@ const Rents = () => {
           Trending Areas <TbBrandGoogleAnalytics size={28} />
         </h2>
         <div className="trending-property">
-          {/* {properties?.map((key) => (
-            <Card key={key} />
-          ))} */}
+          {trending?.map((property) => (
+            <TrendingCard key={property.key} property={property} />
+          ))}
         </div>
       </div>
       <div className="faq container">

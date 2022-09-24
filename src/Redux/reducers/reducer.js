@@ -18,6 +18,14 @@ export default function reducer(state={},action){
             return{
                 ...state,user:action.payload
             }
+        case typesOfActions.getRentalTrending:
+            return{
+                ...state,rentalsTrending:action.payload
+            }
+        case typesOfActions.getSalesTrending:
+            return {
+                ...state, salesTrending: action.payload
+            }
         default:
             return {...state}
     }

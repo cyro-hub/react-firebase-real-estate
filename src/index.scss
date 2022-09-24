@@ -84,3 +84,17 @@ body {
       border-radius: 5px;
       height: 5px;
 }
+
+.loader{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ::-webkit-scrollbar {
+      background-color: white;
+      border-radius: 5px;
+      height: 5px;
+    }
+}

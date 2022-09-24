@@ -18,16 +18,31 @@ const useFetch = (category) => {
       orderBy('timeStamp', 'desc'),
       limit(20),
     )
-
-    let propArr = []
     onSnapshot(newSalesRef, (querySnapshot) => {
+      let propArr = []
       querySnapshot.forEach((doc) => {
         propArr.push(doc.data())
-
         if (category === 'sales') {
           return propertyCategory.getSales(propArr)
         }
         return propertyCategory.getRental(propArr)
+      })
+    })
+
+    const trendingRef = query(
+      collection(firebase.db, 'properties'),
+      where('category', '==', category),
+      orderBy('likes', 'desc'),
+      limit(20),
+    )
+    onSnapshot(trendingRef, (querySnapshot) => {
+      let propArr = []
+      querySnapshot.forEach((doc) => {
+        propArr.push(doc.data())
+        if (category === 'sales') {
+          return propertyCategory.getSalesTrending(propArr)
+        }
+        return propertyCategory.getRentalsTrending(propArr)
       })
     })
   })
