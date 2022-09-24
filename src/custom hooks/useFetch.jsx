@@ -16,7 +16,7 @@ const useFetch = (category) => {
       collection(firebase.db, 'properties'),
       where('category', '==', category),
       orderBy('timeStamp', 'desc'),
-      limit(20),
+      limit(40),
     )
     onSnapshot(newSalesRef, (querySnapshot) => {
       let propArr = []

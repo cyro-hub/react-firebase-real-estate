@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import img from '../assets/images/pexels-curtis-adams-6510949.jpg'
-import { BsCircleFill, BsWhatsapp } from 'react-icons/bs'
-import { AiOutlineHeart, AiFillHeart ,AiTwotoneLike} from 'react-icons/ai'
+import { BsCircleFill, BsWhatsapp, BsFillChatSquareFill } from 'react-icons/bs'
+import { AiOutlineHeart, AiFillHeart, AiTwotoneLike } from 'react-icons/ai'
 import { FaShare } from 'react-icons/fa'
 import { ImLocation } from 'react-icons/im'
 import './scss/card.scss'
@@ -58,7 +58,10 @@ const Card = ({ property }) => {
           navigate(`/property/${key}`, { state: property })
         }}
       >
-        <div className="badge"><AiTwotoneLike size={10}/>{` ${likes.length}`}</div>
+        <div className="badge">
+          <AiTwotoneLike size={10} />
+          {` ${likes.length}`}
+        </div>
       </div>
       <div className="card-info">
         <div className="info-header">
@@ -72,15 +75,8 @@ const Card = ({ property }) => {
             ) : (
               <AiOutlineHeart size={25} onClick={addLikes} />
             )}
-            <BsWhatsapp size={25} />
-            <FaShare
-              size={25}
-              onClick={() =>
-                window.open(
-                  `https://web.whatsapp.com://send?text=${window.location}`,
-                )
-              }
-            />
+            <BsFillChatSquareFill size={23} />
+            <BsWhatsapp size={24} />
           </div>
         </div>
       </div>

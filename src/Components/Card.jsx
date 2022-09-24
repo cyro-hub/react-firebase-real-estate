@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import img from '../assets/images/pexels-curtis-adams-6510949.jpg'
-import { BsCircleFill, BsWhatsapp } from 'react-icons/bs'
+import { BsCircleFill, BsWhatsapp ,BsFillChatSquareFill} from 'react-icons/bs'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { FaShare } from 'react-icons/fa'
 import { ImLocation } from 'react-icons/im'
@@ -72,15 +72,8 @@ const Card = ({ property }) => {
             ) : (
               <AiOutlineHeart size={25} onClick={addLikes} />
             )}
-            <BsWhatsapp size={25} />
-            <FaShare
-              size={25}
-              onClick={() =>
-                window.open(
-                  `https://web.whatsapp.com://send?text=${window.location}`,
-                )
-              }
-            />
+            <BsFillChatSquareFill size={23}/>
+            <BsWhatsapp size={24} />
           </div>
         </div>
       </div>

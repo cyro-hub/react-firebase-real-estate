@@ -79,14 +79,13 @@ const Property = () => {
           <div className="users-attention">
             <AiOutlineHeart size={25} />
             <BsWhatsapp size={25} />
-            <FaShare
-              size={25}
-              onClick={() =>
-                window.open(
-                  `https://web.whatsapp.com://send?text=${window.location}`,
-                )
-              }
-            />
+            <a
+              href={`whatsapp://send?text=${window.location}`}
+              data-action="share/whatsapp/share"
+              target="_blank"
+            >
+              <FaShare size={25} />
+            </a>
           </div>
         </div>
         <div className="property-descriptions">

@@ -21,6 +21,7 @@ const Rents = () => {
   const trending = useSelector((state) => state.rentalsTrending)
   const faq = useSelector((state) => state.faq)
   const [isTyping, setIsTyping] = useState(true)
+  const [search, setSearch] = useState('')
 
   return (
     <>
@@ -37,10 +38,13 @@ const Rents = () => {
           Not only imagination but with the most complete source of homes for
           Rents and Sale near you
         </h3>
-        <button className="btn">Discover</button>
+
+        <button className="btn">
+          <a href="#property">Discover</a>
+        </button>
       </div>
       <div className="welcome"></div>
-      <div className="properties container">
+      <div className="properties container" id="property">
         <div className="search-container">
           <div className="search">
             <input
@@ -48,6 +52,10 @@ const Rents = () => {
               name="search"
               onInput={() => setIsTyping(false)}
               onBlur={() => setIsTyping(true)}
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
+              placeholder="property"
+              autoComplete="off"
             />
             {isTyping && <BsSearch size={20} />}
           </div>

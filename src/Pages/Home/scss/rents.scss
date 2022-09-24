@@ -79,6 +79,11 @@ $primary-color: #111721;
             text-decoration: none;
             padding:3px 20px;
             padding-top: 7px;
+
+            a{
+                text-decoration: none;
+                color: white;
+            }
         }
         .btn:hover{
             background-color: #111721dc;
@@ -100,6 +105,10 @@ $primary-color: #111721;
     margin-top: 1rem;
     margin-bottom: 1rem;
     font-size: 30px;
+
+    svg{
+        margin-bottom: -3px;
+    }
 }
 
 .faq{

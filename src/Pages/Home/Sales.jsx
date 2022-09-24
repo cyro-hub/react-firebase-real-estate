@@ -20,6 +20,7 @@ const Sales = () => {
   const trending = useSelector((state) => state.salesTrending)
   const faq = useSelector((state) => state.faq)
   const [isTyping, setIsTyping] = useState(true)
+  const [search, setSearch] = useState('')
 
   return (
     <>
@@ -36,17 +37,12 @@ const Sales = () => {
           Not only imagination but with the most complete source of homes for
           Rents and Sale near you
         </h3>
-        <button
-          className="btn"
-          onClick={() => {
-            navigate('/sale#properties')
-          }}
-        >
-          Discover
+        <button className="btn">
+          <a href="#property">Discover</a>
         </button>
       </div>
       <div className="welcome"></div>
-      <div className="properties container">
+      <div className="properties container" id="property">
         <div className="search-container">
           <div className="search">
             <input
@@ -54,14 +50,24 @@ const Sales = () => {
               name="search"
               onInput={() => setIsTyping(false)}
               onBlur={() => setIsTyping(true)}
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
+              placeholder="property"
+              autoComplete="off"
             />
             {isTyping && <BsSearch size={20} />}
           </div>
         </div>
         <div className="new-properties" id="properties">
-          {newSales?.map((property) => (
-            <Card key={property.key} property={property} />
-          ))}
+          {newSales
+            ?.filter((property) =>
+              property.property_type
+                .toLocaleLowerCase()
+                .includes(search.toLocaleLowerCase()),
+            )
+            .map((property) => (
+              <Card key={property.key} property={property} />
+            ))}
         </div>
         <h2 className="trending_header">
           Trending Areas <TbBrandGoogleAnalytics size={28} />
