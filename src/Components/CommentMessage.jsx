@@ -4,12 +4,12 @@ import moment from 'moment'
 import { useSelector } from 'react-redux'
 
 const CommentMessage = ({ comment }) => {
-  const { photoURL } = useSelector((state) => state.user)
-  const { message, timeStamp, userName } = comment
+  const user = useSelector((state) => state.user)
+  const { photoURL, message, timeStamp, userName } = comment
   return (
     <>
       <div className="message-container">
-        {photoURL ? (
+        {user?.photoURL ? (
           <Avatar
             alt="Remy Sharp"
             src={photoURL}

@@ -17,7 +17,7 @@ const Rents = () => {
   useFetch('rents')
   useFetchFaq()
   const navigate = useNavigate()
-  const newRents = useSelector((state) => state.rents)
+  const newRents = useSelector((state) => state.rentals)
   const trending = useSelector((state) => state.rentalsTrending)
   const faq = useSelector((state) => state.faq)
   const [isTyping, setIsTyping] = useState(true)

@@ -4,7 +4,7 @@ import Login from './Pages/Account/Login'
 import Rents from './Pages/Home/Rents';
 import Sales from './Pages/Home/Sales';
 import Property from './Pages/Property/Property'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import * as firebase from './Firebase/firebase'
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux';

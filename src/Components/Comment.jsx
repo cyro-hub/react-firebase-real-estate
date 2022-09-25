@@ -36,8 +36,8 @@ export default function BasicModal({
   const [userComment, setUserComment] = useState({
     message: '',
     timeStamp: new Date().toUTCString(),
-    photoURL: userInfo.photoURL || '',
-    userName: userInfo.displayName || 'User',
+    photoURL: userInfo?.photoURL || '',
+    userName: userInfo?.displayName || 'User',
     id: uuidv4(),
   })
   const opinions = useMemo(() => comments.reverse(),[comments])

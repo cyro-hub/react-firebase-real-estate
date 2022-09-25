@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import img from '../assets/images/pexels-curtis-adams-6510949.jpg'
 import { BsCircleFill, BsWhatsapp, BsFillChatSquareFill } from 'react-icons/bs'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
-import { FaShare } from 'react-icons/fa'
 import { ImLocation } from 'react-icons/im'
 import './scss/card.scss'
 import { useNavigate } from 'react-router-dom'
@@ -33,7 +32,7 @@ const Card = ({ property }) => {
 
   const addLikes = async () => {
     if (!user) {
-      navigate('/login')
+      return navigate('/login')
     }
 
     const propertyRef = doc(firebase.db, 'properties', key)

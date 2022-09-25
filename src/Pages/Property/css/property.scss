@@ -6,6 +6,7 @@ $primary-color: #111721;
     align-items: center;
     justify-content: center;
     height: 100%;
+    margin-top: 3rem;
 
     .property-images-container{
         max-width: 500px;
@@ -34,6 +35,8 @@ $primary-color: #111721;
                 margin-bottom: -8px;
                 text-decoration: none;
                 color: white;
+                width: fit-content;
+                height: fit-content;
             }
         }
     }

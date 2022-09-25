@@ -8,7 +8,7 @@ import governorates from '../data/kuwait-governorates.json'
 
 const Contact = () => {
   const [warning, setWarning] = useState('')
-  const [success,setSuccess] = useState('')
+  const [success, setSuccess] = useState('')
   const [loading, setLoading] = useState(false)
   const [areas, setAreas] = useState(governorates[0].areas)
   const [isInputting, setIsInputting] = useState({
@@ -61,21 +61,21 @@ const Contact = () => {
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setWarning('')
-      setSuccess('')
-    }, 4000)
-
-    return clearTimeout(timer)
-  })
-
-  useEffect(() => {
     governorates?.map((governorate) => {
       if (governorate.title.en === contact?.governorate) {
         setAreas(governorate.areas)
       }
     })
   }, [contact.governorate])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setWarning('')
+      setSuccess('')
+    }, 4000)
+
+    return () => clearTimeout(timer)
+  })
 
   return (
     <div className="contact">
