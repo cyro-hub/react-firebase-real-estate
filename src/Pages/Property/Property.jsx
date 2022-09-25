@@ -49,7 +49,7 @@ const Property = () => {
       return navigate('/login')
     }
 
-    const propertyRef = doc(firebase.db, 'properties', key)
+    const propertyRef = doc(firebase.db, 'properties', param.key)
 
     if (!myLike) {
       return await updateDoc(propertyRef, {

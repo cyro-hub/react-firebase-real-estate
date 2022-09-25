@@ -57,8 +57,8 @@ export default function BasicModal({
       setUserComment({
         message: '',
         timeStamp: new Date().toUTCString(),
-        photoURL: userInfo.photoURL || '',
-        userName: userInfo.displayName || 'User',
+        photoURL: userInfo?.photoURL || '',
+        userName: userInfo?.displayName || 'User',
         id: uuidv4(),
       })
       setLoading(false)
