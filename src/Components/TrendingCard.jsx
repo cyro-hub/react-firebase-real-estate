@@ -22,7 +22,7 @@ const Card = ({ property }) => {
     key,
     property_type,
     price,
-    number_of_room,
+    number_of_rooms,
     number_of_bathroom,
     sqft,
     location,
@@ -101,7 +101,7 @@ const Card = ({ property }) => {
             {'د.ك'}
           </h2>
         </div>
-        <div className="dimension">{`${number_of_room} bed room, ${number_of_bathroom} bath, ${sqft}sqft`}</div>
+        <div className="dimension">{`${number_of_rooms} bed room, ${number_of_bathroom} bath, ${sqft}sqft`}</div>
         <div className="location">
           <a
             href={`https://www.google.com/maps?q=${location.lat},${location.lon}`}

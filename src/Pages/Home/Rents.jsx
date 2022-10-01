@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TbBrandGoogleAnalytics } from 'react-icons/tb'
 import Card from '../../Components/Card'
 import { Link, useNavigate } from 'react-router-dom'
@@ -6,12 +6,12 @@ import './scss/rents.scss'
 import Contact from '../../Components/Contact'
 import Footer from '../../Components/Footer'
 import { BsSearch } from 'react-icons/bs'
-import logo from '../../assets/logo1.png'
 import { useDispatch, useSelector } from 'react-redux'
 import useFetch from '../../custom hooks/useFetch'
 import useFetchFaq from '../../custom hooks/useFetchFaq'
 import Nav from '../../Components/Nav'
 import TrendingCard from '../../Components/TrendingCard'
+import * as action from '../../Redux/actions/actions'
 
 const Rents = () => {
   useFetch('rents')
@@ -22,6 +22,10 @@ const Rents = () => {
   const faq = useSelector((state) => state.faq)
   const [isTyping, setIsTyping] = useState(true)
   const [search, setSearch] = useState('')
+
+  // useEffect(() => {
+  //   action.getRental(newRents.filter())
+  // }, [search])
 
   return (
     <>
@@ -52,7 +56,10 @@ const Rents = () => {
               name="search"
               onInput={() => setIsTyping(false)}
               onBlur={() => setIsTyping(true)}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                // localStorage.setItem('search', JSON.stringify(e.target.value))
+                setSearch(e.target.value)
+              }}
               value={search}
               placeholder="property"
               autoComplete="off"
@@ -61,9 +68,15 @@ const Rents = () => {
           </div>
         </div>
         <div className="new-properties">
-          {newRents?.map((property) => (
-            <Card key={property.key} property={property} />
-          ))}
+          {newRents
+            ?.filter((property) =>
+              property.property_type
+                .toLocaleLowerCase()
+                .includes(search.toLocaleLowerCase()),
+            )
+            .map((property) => (
+              <Card key={property.key} property={property} />
+            ))}
         </div>
         <h2 className="trending_header">
           Trending Areas <TbBrandGoogleAnalytics size={28} />

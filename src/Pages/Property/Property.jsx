@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom'
 import './css/property.scss'
 import testImage from '../../assets/images/pexels-expect-best-323780.jpg'
 import { BsCircleFill, BsWhatsapp, BsFillChatSquareFill } from 'react-icons/bs'
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
-import { FaShare } from 'react-icons/fa'
+import { AiOutlineHeart, AiFillHeart, AiTwotoneLike } from 'react-icons/ai'
+import { FaShare, FaRegComment } from 'react-icons/fa'
 import { ImLocation } from 'react-icons/im'
 import moment from 'moment'
 import { onSnapshot } from 'firebase/firestore'
@@ -27,17 +27,24 @@ const Property = () => {
     {
       imagesURL,
       timeStamp,
+      category,
       built_in,
-      number_of_room,
+      number_of_rooms,
       number_of_bathroom,
+      number_car_garage,
       sqft,
       property_type,
       price,
       location_description,
-      description,
       key,
       likes,
       comments,
+      location,
+      monthly_payment,
+      near_by_environments,
+      number_of_kitchen,
+      governorate,
+      area,
     },
     setProperty,
   ] = useState({})
@@ -71,6 +78,8 @@ const Property = () => {
     const unsub = onSnapshot(
       doc(firebase.db, 'properties', param.key),
       (doc) => {
+        if (typeof doc.data() !== 'object') return navigate(-1)
+        console.log(doc.data())
         setProperty(doc.data())
       },
     )
@@ -105,7 +114,7 @@ const Property = () => {
               pagination: true,
               arrows: false,
               drag: 'free',
-              cancelable:false,
+              cancelable: false,
               autoScroll: {
                 speed: 1,
               },
@@ -149,36 +158,76 @@ const Property = () => {
               {price} {'د.ك'}
             </h2>
           </div>
+
           <div className="dimension">
-            {number_of_room} bed room, {number_of_bathroom} bath, {sqft}sqft
+            {number_of_rooms} bed room, {number_of_bathroom} bath,{' '}
+            {number_of_kitchen} kitchen
           </div>
           <a href="#" className="location">
             <ImLocation size={12} /> {location_description}
           </a>
           <div className="more-description">
-            {/* <div className="description-property">
-              <h3>Installment Payment</h3>
-              <p>251 {'د.ك'}</p>
-            </div> */}
+            {monthly_payment && (
+              <div className="description-property">
+                <h3>Monthly Payment</h3>
+                <p> {`${monthly_payment} د.ك`}</p>
+              </div>
+            )}
             <div className="description-property">
               <h3>Price per sqft</h3>
-              <p>251 {'د.ك'}</p>
+              <p>
+                {Math.floor(Number(price) / Number(sqft))} {'د.ك'}
+              </p>
             </div>
-            {/* <div className="description-property">
+            <div className="description-property">
+              <h3>Category</h3>
+              <p>{category}</p>
+            </div>
+            <div className="description-property">
               <h3>Car Garage</h3>
-              <p>2</p>
-            </div> */}
+              <p>{number_car_garage}</p>
+            </div>
+            <div className="description-property">
+              <h3>Total sqft</h3>
+              <p>{sqft + ' sqft'}</p>
+            </div>
+            <div className="description-property">
+              <h3>Governorate</h3>
+              <p>{governorate}</p>
+            </div>
+            <div className="description-property">
+              <h3>City</h3>
+              <p>{area}</p>
+            </div>
             <div className="description-property">
               <h3>Built on the year</h3>
               <p>{built_in.split('-')[0]}</p>
             </div>
-            <div className="description-property">
-              <h3>Near by Environment</h3>
-              <p>{description}</p>
-            </div>
+            {near_by_environments !== [] && (
+              <div className="description-property">
+                <h3>Near by Environment</h3>
+                <ul>
+                  {near_by_environments?.map((environment, index) => (
+                    <li key={index}>{environment}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div className="description-property">
               <h3>Posted</h3>
               <p>{moment(timeStamp).fromNow()}</p>
+            </div>
+            <div className="description-property">
+              <h3>Likes</h3>
+              <p>
+                {likes.length} <AiTwotoneLike />
+              </p>
+            </div>
+            <div className="description-property">
+              <h3>Comments</h3>
+              <p>
+                {comments.length} <FaRegComment />
+              </p>
             </div>
           </div>
         </div>

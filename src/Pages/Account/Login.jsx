@@ -89,7 +89,7 @@ const Login = () => {
           payload: user,
         })
 
-        navigate('/')
+        navigate(-1)
       })
       .catch((error) => {
         const errorCode = error.code
@@ -108,7 +108,7 @@ const Login = () => {
           payload: user,
         })
 
-        navigate('/')
+        navigate(-1)
       })
       .catch((error) => {
         const errorCode = error.code
@@ -126,7 +126,7 @@ const Login = () => {
           payload: user
         })
 
-        navigate('/')
+        navigate(-1)
       })
       .catch((error) => {
         const errorCode = error.code

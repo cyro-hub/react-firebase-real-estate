@@ -9,8 +9,10 @@ import {
 } from 'firebase/firestore'
 import * as firebase from '../Firebase/firebase'
 import * as propertyCategory from '../Redux/actions/actions'
+import { useMemo, useState } from 'react'
 
 const useFetch = (category) => {
+
   const { data } = useQuery('newProperties', () => {
     const newSalesRef = query(
       collection(firebase.db, 'properties'),
