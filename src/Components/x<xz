@@ -1,2 +1,0 @@
-<AiTwotoneLike size={10} />
-          {` ${likes.length}`}
