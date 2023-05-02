@@ -1,31 +1,49 @@
-import React, { useEffect, useState } from 'react'
-import { TbBrandGoogleAnalytics } from 'react-icons/tb'
-import Card from '../../Components/Card'
-import { Link, useNavigate } from 'react-router-dom'
-import './scss/rents.scss'
-import Contact from '../../Components/Contact'
-import Footer from '../../Components/Footer'
-import { BsSearch } from 'react-icons/bs'
-import { useDispatch, useSelector } from 'react-redux'
-import useFetch from '../../custom hooks/useFetch'
-import useFetchFaq from '../../custom hooks/useFetchFaq'
-import Nav from '../../Components/Nav'
-import TrendingCard from '../../Components/TrendingCard'
-import * as action from '../../Redux/actions/actions'
+import React, { useEffect, useState } from "react";
+import { TbBrandGoogleAnalytics } from "react-icons/tb";
+import Card from "../../Components/Card";
+import { Link, useNavigate } from "react-router-dom";
+import "./scss/rents.scss";
+import Contact from "../../Components/Contact";
+import Footer from "../../Components/Footer";
+import { BsSearch } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import useFetch from "../../custom hooks/useFetch";
+import useFetchFaq from "../../custom hooks/useFetchFaq";
+import Nav from "../../Components/Nav";
+import TrendingCard from "../../Components/TrendingCard";
+import * as action from "../../Redux/actions/actions";
+import Skeleton from "@mui/material/Skeleton";
 
 const Rents = () => {
-  useFetch('rents')
-  useFetchFaq()
-  const navigate = useNavigate()
-  const newRents = useSelector((state) => state.rentals)
-  const trending = useSelector((state) => state.rentalsTrending)
-  const faq = useSelector((state) => state.faq)
-  const [isTyping, setIsTyping] = useState(true)
-  const [search, setSearch] = useState('')
+  useFetch("rents");
+  useFetchFaq();
+  const navigate = useNavigate();
+  const newRents = useSelector((state) => state.rentals);
+  const [rentals, setRentals] = useState(newRents);
+  const trending = useSelector((state) => state.rentalsTrending);
+  const faq = useSelector((state) => state.faq);
+  const [isTyping, setIsTyping] = useState(true);
+  const [search, setSearch] = useState("");
 
-  // useEffect(() => {
-  //   action.getRental(newRents.filter())
-  // }, [search])
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (search) {
+        setRentals(
+          newRents?.filter((property) =>
+            property.property_type
+              .toLocaleLowerCase()
+              .includes(search.toLocaleLowerCase())
+          )
+        );
+        console.log("heloo");
+      } else {
+        setRentals(newRents);
+        console.log("heloo");
+      }
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [search]);
 
   return (
     <>
@@ -58,7 +76,7 @@ const Rents = () => {
               onBlur={() => setIsTyping(true)}
               onChange={(e) => {
                 // localStorage.setItem('search', JSON.stringify(e.target.value))
-                setSearch(e.target.value)
+                setSearch(e.target.value);
               }}
               value={search}
               placeholder="property"
@@ -68,23 +86,53 @@ const Rents = () => {
           </div>
         </div>
         <div className="new-properties">
-          {newRents
-            ?.filter((property) =>
-              property.property_type
-                .toLocaleLowerCase()
-                .includes(search.toLocaleLowerCase()),
-            )
-            .map((property) => (
-              <Card key={property.key} property={property} />
-            ))}
+          {newRents ? (
+            <>
+              {(rentals || newRents)?.map((property) => (
+                <Card key={property.key} property={property} />
+              ))}
+            </>
+          ) : (
+            <>
+              {new Array(4).fill("").map((item) => (
+                <Skeleton
+                  variant="rounded"
+                  width={250}
+                  height={300}
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.2)",
+                    marginInline: "1em",
+                  }}
+                />
+              ))}
+            </>
+          )}
         </div>
         <h2 className="trending_header">
           Trending Areas <TbBrandGoogleAnalytics size={28} />
         </h2>
         <div className="trending-property">
-          {trending?.map((property) => (
-            <TrendingCard key={property.key} property={property} />
-          ))}
+          {trending ? (
+            <>
+              {trending?.map((property) => (
+                <TrendingCard key={property.key} property={property} />
+              ))}
+            </>
+          ) : (
+            <>
+              {new Array(4).fill("").map((item) => (
+                <Skeleton
+                  variant="rounded"
+                  width={250}
+                  height={300}
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.2)",
+                    marginInline: "1em",
+                  }}
+                />
+              ))}
+            </>
+          )}
         </div>
       </div>
       <div className="faq container">
@@ -98,7 +146,7 @@ const Rents = () => {
       <Contact />
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Rents
+export default Rents;

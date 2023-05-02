@@ -1,26 +1,46 @@
-import React, { useState } from 'react'
-import { TbBrandGoogleAnalytics } from 'react-icons/tb'
-import Card from '../../Components/Card'
-import TrendingCard from '../../Components/TrendingCard'
-import { Link, useNavigate } from 'react-router-dom'
-import './scss/rents.scss'
-import Contact from '../../Components/Contact'
-import Footer from '../../Components/Footer'
-import { BsSearch } from 'react-icons/bs'
-import useFetch from '../../custom hooks/useFetch'
-import useFetchFaq from '../../custom hooks/useFetchFaq'
-import { useSelector, useDispatch } from 'react-redux'
-import Nav from '../../Components/Nav'
+import React, { useState, useEffect } from "react";
+import { TbBrandGoogleAnalytics } from "react-icons/tb";
+import Card from "../../Components/Card";
+import TrendingCard from "../../Components/TrendingCard";
+import { Link, useNavigate } from "react-router-dom";
+import "./scss/rents.scss";
+import Contact from "../../Components/Contact";
+import Footer from "../../Components/Footer";
+import { BsSearch } from "react-icons/bs";
+import useFetch from "../../custom hooks/useFetch";
+import useFetchFaq from "../../custom hooks/useFetchFaq";
+import { useSelector, useDispatch } from "react-redux";
+import Nav from "../../Components/Nav";
+import Skeleton from "@mui/material/Skeleton";
 
 const Sales = () => {
-  useFetch('sales')
-  useFetchFaq()
-  const navigate = useNavigate()
-  const newSales = useSelector((state) => state.sales)
-  const trending = useSelector((state) => state.salesTrending)
-  const faq = useSelector((state) => state.faq)
-  const [isTyping, setIsTyping] = useState(true)
-  const [search, setSearch] = useState('')
+  useFetch("sales");
+  useFetchFaq();
+  const navigate = useNavigate();
+  const newSales = useSelector((state) => state.sales);
+  const [sales, setSales] = useState(newSales);
+  const trending = useSelector((state) => state.salesTrending);
+  const faq = useSelector((state) => state.faq);
+  const [isTyping, setIsTyping] = useState(true);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (search) {
+        setSales(
+          newSales?.filter((property) =>
+            property.property_type
+              .toLocaleLowerCase()
+              .includes(search.toLocaleLowerCase())
+          )
+        );
+      } else {
+        setSales(newSales);
+      }
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [search]);
 
   return (
     <>
@@ -58,24 +78,54 @@ const Sales = () => {
             {isTyping && <BsSearch size={20} />}
           </div>
         </div>
-        <div className="new-properties" id="properties">
-          {newSales
-            ?.filter((property) =>
-              property.property_type
-                .toLocaleLowerCase()
-                .includes(search.toLocaleLowerCase()),
-            )
-            .map((property) => (
-              <Card key={property.key} property={property} />
-            ))}
+        <div className="new-properties">
+          {newSales ? (
+            <>
+              {(sales || newSales)?.map((property) => (
+                <Card key={property.key} property={property} />
+              ))}
+            </>
+          ) : (
+            <>
+              {new Array(4).fill("").map((item) => (
+                <Skeleton
+                  variant="rounded"
+                  width={250}
+                  height={300}
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.2)",
+                    marginInline: "1em",
+                  }}
+                />
+              ))}
+            </>
+          )}
         </div>
         <h2 className="trending_header">
           Trending Areas <TbBrandGoogleAnalytics size={28} />
         </h2>
         <div className="trending-property">
-          {trending?.map((property) => (
-            <TrendingCard key={property.key} property={property} />
-          ))}
+          {trending ? (
+            <>
+              {trending?.map((property) => (
+                <TrendingCard key={property.key} property={property} />
+              ))}
+            </>
+          ) : (
+            <>
+              {new Array(4).fill("").map((item) => (
+                <Skeleton
+                  variant="rounded"
+                  width={250}
+                  height={300}
+                  sx={{
+                    bgcolor: "rgba(255, 255, 255, 0.2)",
+                    marginInline: "1em",
+                  }}
+                />
+              ))}
+            </>
+          )}
         </div>
       </div>
       <div className="faq container">
@@ -89,7 +139,7 @@ const Sales = () => {
       <Contact />
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Sales
+export default Sales;

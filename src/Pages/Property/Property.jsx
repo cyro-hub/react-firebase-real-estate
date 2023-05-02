@@ -79,7 +79,7 @@ const Property = () => {
       doc(firebase.db, 'properties', param.key),
       (doc) => {
         if (typeof doc.data() !== 'object') return navigate(-1)
-        console.log(doc.data())
+        // console.log(doc.data())
         setProperty(doc.data())
       },
     )

@@ -1,164 +1,167 @@
 $primary-color: #111721;
 
-.nav{
+.nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+
+  img {
+    width: 80px;
+  }
+}
+
+.welcome {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../../assets/images/pexels-expect-best-323781.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  align-items: center;
+}
+.welcome-cover {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .home-nav {
     position: absolute;
-    top:0;
-    width: 100%;
-    padding: 0.5rem 1rem;
-    z-index: 1000;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-between;
-
-    img{
-        width: 80px;
+    top: 30%;
+    a {
+      margin: 3rem;
+      color: white;
+      text-decoration: none;
+      font-size: 35px;
     }
+    a:hover {
+      text-decoration: underline;
+    }
+    .rent {
+      text-decoration: underline;
+    }
+  }
+  h2 {
+    position: absolute;
+    top: 50%;
+    font-size: 30px;
+  }
+  h3 {
+    position: absolute;
+    top: 57%;
+    max-width: 800px;
+    text-align: center;
+    font-size: 25px;
+  }
+  .btn {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 10%;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Ravi Prakash;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    padding: 3px 20px;
+    padding-top: 7px;
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+  .btn:hover {
+    background-color: #111721dc;
+  }
 }
 
-.welcome{
-    width: 100vw;
-    height: 100vh;
-    background-image: url('../../../assets/images/pexels-expect-best-323781.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    align-items: center;
-}
-.welcome-cover{
-        position: absolute;
-        background-color: rgba(0, 0, 0, 0.7);
-        top: 0;
-        height: 100vh;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 0 .5rem;display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .home-nav{
-            position: absolute;
-            top: 30%;
-            a{
-                margin: 3rem;
-                color: white;
-                text-decoration: none;
-                font-size: 35px;
-            }
-            a:hover{
-                text-decoration: underline;
-            }
-            .rent{
-                text-decoration: underline;
-            }
-        }
-        h2{
-            position: absolute;
-            top: 50%;
-            font-size: 30px;
-        }
-        h3{
-            position: absolute;
-            top: 57%;
-            max-width: 800px;
-            text-align: center;
-            font-size: 25px;
-        }
-        .btn{
-            background-color: $primary-color;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            position: absolute;
-            bottom: 10%;
-            font-size: 20px;
-            font-weight: bold;
-            font-family: Ravi Prakash;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            padding:3px 20px;
-            padding-top: 7px;
-
-            a{
-                text-decoration: none;
-                color: white;
-            }
-        }
-        .btn:hover{
-            background-color: #111721dc;
-        }
-}
-
-.trending-property, .new-properties{
-    position: relative;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        padding: 0.75rem 0;
+.trending-property,
+.new-properties {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 0.75rem 0;
+  
 }
 .trending_header {
-    width: 100%;
-    text-align: center;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-size: 30px;
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 30px;
 
-    svg{
-        margin-bottom: -3px;
-    }
+  svg {
+    margin-bottom: -3px;
+  }
 }
 
-.faq{
-    align-items:center;
-    justify-content: left;
-    width: 100%;
-    padding: 1rem 2rem;
+.faq {
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  padding: 1rem 2rem;
 
-    h2{
-        width: 100%;
-        text-align: center;
-    }
+  h2 {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .search-container {
-    width: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .search {
+    border-radius: 5px;
+    background-color: $primary-color;
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 500px !important;
+    min-width: 180px !important;
+    border: 0.5px solid white;
 
-    .search {
-        border-radius: 5px;
-        background-color: $primary-color;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        max-width: 500px !important;
-        min-width: 180px !important;
-        border: 0.5px solid white;
-
-        input {
-            color: white;
-            outline: none;
-            font-size: 35;
-            letter-spacing: 1.5px;
-            font-weight: bold;
-            padding: 8px 10px;
-            background-color: transparent;
-            border: none;
-            flex: 1;
-        }
-
-        svg {
-            margin-right: 5px;
-        }
+    input {
+      color: white;
+      outline: none;
+      font-size: 35;
+      letter-spacing: 1.5px;
+      font-weight: bold;
+      padding: 8px 10px;
+      background-color: transparent;
+      border: none;
+      flex: 1;
     }
+
+    svg {
+      margin-right: 5px;
+    }
+  }
 }
 
-@media(max-width:500px) {
-    .search {
-        width: 90%;
-    }
+@media (max-width: 500px) {
+  .search {
+    width: 90%;
+  }
 }
